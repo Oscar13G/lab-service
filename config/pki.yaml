@@ -1,0 +1,5 @@
+pki:
+  provider: ${PKI_PROVIDER:lab}
+  base-url: ${PKI_BASE_URL:https://localhost:8443}
+  username: ${PKI_USERNAME:}
+  password: ${PKI_PASSWORD:}
