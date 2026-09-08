@@ -1,3 +1,15 @@
 spring:
   application:
     name: lab-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5432/labdb
+    username: labuser
+    password: ${DB_PASSWORD}
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+
+  flyway:
+    enabled: true
