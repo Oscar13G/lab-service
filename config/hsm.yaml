@@ -1,5 +1,0 @@
-hsm:
-  provider: ${HSM_PROVIDER:softhsm}
-  pkcs11-library: ${HSM_PKCS11_LIBRARY:}
-  token-label: ${HSM_TOKEN_LABEL:LAB-HSM}
-  user-pin: ${HSM_USER_PIN:}

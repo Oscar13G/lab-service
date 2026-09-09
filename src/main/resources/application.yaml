@@ -1,6 +1,6 @@
 spring:
   application:
-    name: lab-service
+    name: lab-admin-service
 
   datasource:
     url: jdbc:postgresql://localhost:5432/labdb
