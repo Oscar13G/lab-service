@@ -3,9 +3,9 @@ spring:
     name: lab-admin-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/labdb
-    username: labuser
-    password: labpassword
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:labdb}
+    username: ${DB_USER:labuser}
+    password: ${DB_PASSWORD:labpassword}
 
   jpa:
     hibernate:
@@ -13,3 +13,8 @@ spring:
 
   flyway:
     enabled: true
+
+security:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-minutes: 30

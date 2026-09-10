@@ -47,11 +47,10 @@ public class ConsumerService {
 
     // Elimina un consumidor por su identificador.
     public boolean deleteConsumer(Long id) {
-    if (!consumerRepository.existsById(id)) {
-        return false;
-    }
-
-    consumerRepository.deleteById(id);
-    return true;
+        if (!consumerRepository.existsById(id)) {
+            return false;
+        }
+        consumerRepository.deleteById(id);
+        return true;
     }
 }
