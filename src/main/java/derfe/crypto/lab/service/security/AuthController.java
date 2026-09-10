@@ -17,43 +17,54 @@ import org.springframework.web.server.ResponseStatusException;
 @RequestMapping("/auth")
 public class AuthController {
 
-    private final AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
+  private final JwtService jwtService;
 
-    public AuthController(AuthenticationManager authenticationManager) {
-        this.authenticationManager = authenticationManager;
+  public AuthController(
+    AuthenticationManager authenticationManager,
+      JwtService jwtService) {
+
+    this.authenticationManager = authenticationManager;
+    this.jwtService = jwtService;
+  }
+
+  @PostMapping("/login")
+  @ResponseStatus(HttpStatus.OK)
+  public LoginResponse login(@RequestBody LoginRequest request) {
+
+    try {
+      Authentication authentication =
+          authenticationManager.authenticate(
+              new UsernamePasswordAuthenticationToken(
+                  request.getUsername(),
+                  request.getPassword()
+              )
+          );
+
+      String role = authentication.getAuthorities()
+          .iterator()
+          .next()
+          .getAuthority()
+          .replace("ROLE_", "");
+
+      String token = jwtService.generateToken(
+          authentication.getName(),
+          role
+      );
+
+      return new LoginResponse(
+          authentication.getName(),
+          role,
+          "Login correcto",
+          token
+      );
+
+    } catch (AuthenticationException exception) {
+
+      throw new ResponseStatusException(
+          HttpStatus.UNAUTHORIZED,
+          "Usuario o contraseña incorrectos"
+      );
     }
-
-    @PostMapping("/login")
-    @ResponseStatus(HttpStatus.OK)
-    public LoginResponse login(@RequestBody LoginRequest request) {
-
-        try {
-            Authentication authentication =
-                    authenticationManager.authenticate(
-                            new UsernamePasswordAuthenticationToken(
-                                    request.getUsername(),
-                                    request.getPassword()
-                            )
-                    );
-
-            String role = authentication.getAuthorities()
-                    .iterator()
-                    .next()
-                    .getAuthority()
-                    .replace("ROLE_", "");
-
-            return new LoginResponse(
-                    authentication.getName(),
-                    role,
-                    "Login correcto"
-            );
-
-        } catch (AuthenticationException exception) {
-
-            throw new ResponseStatusException(
-                    HttpStatus.UNAUTHORIZED,
-                    "Usuario o contraseña incorrectos"
-            );
-        }
-    }
+  }
 }
