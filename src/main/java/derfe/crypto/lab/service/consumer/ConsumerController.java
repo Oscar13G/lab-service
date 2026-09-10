@@ -68,17 +68,18 @@ public class ConsumerController {
                 );
     }
     // Elimina un consumidor existente.
-        @DeleteMapping("/{id}")
-        @ResponseStatus(HttpStatus.NO_CONTENT)
-        public void deleteConsumer(@PathVariable Long id) {
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteConsumer(@PathVariable Long id) {
 
-                boolean deleted = consumerService.deleteConsumer(id);
+            boolean deleted = consumerService.deleteConsumer(id);
 
-                if (!deleted) {
-                throw new ResponseStatusException(
-                HttpStatus.NOT_FOUND,
-                "Consumer no encontrado"
-                );
-                }
-        }
+            if (!deleted) {
+            throw new ResponseStatusException(
+            HttpStatus.NOT_FOUND,
+            "Consumer no encontrado"
+            );
+            }
+    }
 }
+
