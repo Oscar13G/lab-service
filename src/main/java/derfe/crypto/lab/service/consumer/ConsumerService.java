@@ -44,4 +44,14 @@ public class ConsumerService {
         Consumer updatedConsumer = consumerRepository.save(consumer);
         return Optional.of(updatedConsumer);
     }
+
+    // Elimina un consumidor por su identificador.
+    public boolean deleteConsumer(Long id) {
+    if (!consumerRepository.existsById(id)) {
+        return false;
+    }
+
+    consumerRepository.deleteById(id);
+    return true;
+    }
 }

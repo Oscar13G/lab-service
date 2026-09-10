@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 import java.util.List;
 
@@ -66,4 +67,18 @@ public class ConsumerController {
                         )
                 );
     }
+    // Elimina un consumidor existente.
+        @DeleteMapping("/{id}")
+        @ResponseStatus(HttpStatus.NO_CONTENT)
+        public void deleteConsumer(@PathVariable Long id) {
+
+                boolean deleted = consumerService.deleteConsumer(id);
+
+                if (!deleted) {
+                throw new ResponseStatusException(
+                HttpStatus.NOT_FOUND,
+                "Consumer no encontrado"
+                );
+                }
+        }
 }

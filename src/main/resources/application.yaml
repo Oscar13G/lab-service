@@ -3,9 +3,9 @@ spring:
     name: lab-admin-service
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/labdb
+    url: jdbc:postgresql://localhost:5433/labdb
     username: labuser
-    password: ${DB_PASSWORD}
+    password: labpassword
 
   jpa:
     hibernate:

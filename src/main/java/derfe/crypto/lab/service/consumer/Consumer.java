@@ -43,6 +43,10 @@ public class Consumer {
         return name;
     }
 
+    public void setName(String name) {
+    this.name = name;
+}
+
     // Devuelve el identificador único del consumidor.
     public Long getId() {
         return id;
